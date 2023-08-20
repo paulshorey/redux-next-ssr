@@ -1,25 +1,19 @@
-import React from 'react';
-import {useSelector} from 'react-redux';
-
-import type {TypedUseSelectorHook} from 'react-redux';
-
-import {rootState} from '@/redux/store';
-export const useTypedSelector: TypedUseSelectorHook<rootState> = useSelector;
+import React from "react";
+import useStore from "@/redux/useStore";
 
 function App() {
-    // const dispatch = useDispatch();
-    const {user} = useTypedSelector(state => state);
-
-    return (
-        <header className="px-6 py-3">
-            {/* user status */}
-            <div className="flex justify-between">
-                <span>
-                    {user.ip}&emsp; {user.city}, {user.country}
-                    &emsp;
-                    {user.isp}&emsp;
-                </span>
-                {/* <span
+  const user = useStore((state) => state.user);
+  // const dispatch = useDispatch();
+  return (
+    <header className="px-6 py-3">
+      {/* user status */}
+      <p className="flex justify-between">
+        <span>
+          {user.ip}&emsp; {user.city}, {user.region}
+          &emsp;
+          {user.isp}&emsp;
+        </span>
+        {/* <span
                     className="cursor-pointer"
                     // onClick={() => {
                     //   dispatch(toggleDarkMode());
@@ -27,9 +21,9 @@ function App() {
                 >
                     {ui.darkMode ? '🌚' : '🌞'}
                 </span> */}
-            </div>
-        </header>
-    );
+      </p>
+    </header>
+  );
 }
 
 export default App;

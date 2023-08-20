@@ -1,30 +1,34 @@
-import {AnyAction} from 'redux';
-import {HYDRATE} from 'next-redux-wrapper';
+import { AnyAction } from "redux";
+import { HYDRATE } from "next-redux-wrapper";
 
 export type userState = {
-    ip: string;
-    city: string;
-    country: string;
-    isp: string;
+  ip: string;
+  city: string;
+  region: string;
+  country: string;
+  zip: string;
+  isp: string;
 };
 const initialState = {
-    ip: '',
-    city: '',
-    country: '',
-    isp: '',
+  ip: "",
+  city: "",
+  region: "",
+  country: "",
+  zip: "",
+  isp: "",
 };
 
 const reducer = (state: userState = initialState, action: AnyAction) => {
-    switch (action.type) {
-        case HYDRATE: {
-            console.log('user HYDRATE', action);
-            return {...state, ...action.payload.user};
-        }
-        case 'user/meta':
-            return {...state, ...action.payload};
-        default:
-            return state;
+  switch (action.type) {
+    case HYDRATE: {
+      if (!action.payload.user.ip) return state;
+      return { ...state, ...action.payload.user };
     }
+    case "user/data":
+      return { ...state, ...action.payload };
+    default:
+      return state;
+  }
 };
 
 export default reducer;
