@@ -11,7 +11,7 @@ old fashioned, not @reduxjs/toolkit which is very awkwared to use with SSR
 1. fetch data from API
 2. render it in SSR (instant)
 3. dispatch it to Redux store, so client-side hydration will not lead to data discrepancies
-4. this is done using server side functions, same ones used in client side!
+4. this is done using server side functions, same ones used in client side. This is important, because it keeps the code simple and manageable, while letting us have very fast page load times, and the same data and logic on server and client side.
 
 ### ❥ New standards
 
